@@ -22,5 +22,27 @@ namespace FutureValue.Persistence.EfImplementation.Shared
         {
             this.SaveChanges();
         }
+        public void SeedData()
+        {
+            using (this)
+            {
+                if (this.AspUser.Any()||this.ProjectionForm.Any())
+                {
+                    return;
+                }
+                ProjectionForm.Add(new ProjectionForm
+                {
+                    DateCreated = DateTimeOffset.Now,
+                    IncrementalRate = 10,
+                    IsActive = true,
+                    LowerBoundInterest = 10,
+                    UpperBoundInterest = 50,
+                    MaturityYears = 5,
+                    PresetValue = 1000,
+                    Name = "Sample"
+                });
+                this.SaveChanges();
+            }
+        }
     }
 }

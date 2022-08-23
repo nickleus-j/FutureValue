@@ -14,5 +14,6 @@ namespace FutureValue.Persistence.Shared
         public DbSet<AspUser> AspUser { get; set; }
         public DbSet<ProjectionForm> ProjectionForm { get; set; }
         void Save();
+        void SeedData();
     }
 }

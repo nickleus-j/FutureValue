@@ -17,6 +17,21 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
         {
 
         }
+        public override IEnumerable<ProjectionForm> GetAll()
+        {
+            return Context.ProjectionForm.Where(f => f.IsActive);
+        }
+        public bool Delete(int id)
+        {
+            bool result = false;
+            try
+            {
+                Context.ProjectionForm.Single(f => f.ID == id).IsActive = false;
+                result = true;
+            }catch(Exception ex) { }
+            return result;
+        }
+
         public IEnumerable<ProjectionForm> GetForms(DateTimeOffset startDate, DateTimeOffset? endDate, int page = 1, int pageSize = 10)
         {
             //if (endDate.HasValue)
@@ -27,5 +42,6 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
             return Context.ProjectionForm.Where(form => form.DateCreated >= startDate&&(!endDate.HasValue|| form.DateCreated <= endDate.Value))
                    .Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
+        
     }
 }
