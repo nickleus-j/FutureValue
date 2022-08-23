@@ -6,3 +6,9 @@
 /FutureValue.Presentation/FutureValue.Presentation/obj
 /FutureValue.Presentation/.vs
 /.vs
+/FutureValue.Presentation/FutureValue.Domain/bin/Debug/net6.0
+/FutureValue.Presentation/FutureValue.Domain/obj
+/FutureValue.Presentation/FutureValue.Domain.Tests/obj
+/FutureValue.Presentation/FutureValue.Domain.Tests/bin/Debug/net6.0
+/FutureValue.Presentation/FutureValue.Persistence/obj
+/FutureValue.Presentation/FutureValue.Persistence.EfImplementation/obj
