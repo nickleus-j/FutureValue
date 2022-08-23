@@ -12,3 +12,13 @@
 /FutureValue.Presentation/FutureValue.Domain.Tests/bin/Debug/net6.0
 /FutureValue.Presentation/FutureValue.Persistence/obj
 /FutureValue.Presentation/FutureValue.Persistence.EfImplementation/obj
+/FutureValue/.vs
+/FutureValue/FutureValue.Domain/bin/Debug/net6.0
+/FutureValue/FutureValue.Domain/obj
+/FutureValue/FutureValue.Domain.Tests/obj
+/FutureValue/FutureValue.Domain.Tests/bin/Debug/net6.0
+/FutureValue/FutureValue.Persistence/bin/Debug/net6.0
+/FutureValue/FutureValue.Persistence/obj
+/FutureValue/FutureValue.Persistence.EfImplementation/obj
+/FutureValue/FutureValue.Presentation/bin/Debug/net6.0
+/FutureValue/FutureValue.Presentation/obj

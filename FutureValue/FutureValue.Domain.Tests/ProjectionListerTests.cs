@@ -56,6 +56,7 @@ namespace FutureValue.Domain.Tests
             Assert.Equal(4, result.Count());
             Assert.Equal(form.PresetValue, result.First().StartValue);
             Assert.Equal(result.ElementAt(0).InterestRate+ form.IncrementalRate, result.ElementAt(1).InterestRate);
+            Assert.Equal(result.ElementAt(1).Year+1, result.ElementAt(2).Year);
             Assert.Equal(result.ElementAt(1).FutureValue, result.ElementAt(2).StartValue);
             Assert.Equal(result.ElementAt(2).InterestRate, result.ElementAt(3).InterestRate);
             Assert.Equal(form.UpperBoundInterest, result.ElementAt(3).InterestRate);
