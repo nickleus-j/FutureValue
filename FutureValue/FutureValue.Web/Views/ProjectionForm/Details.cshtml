@@ -4,61 +4,63 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Projection Formsl</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PresetValue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PresetValue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LowerBoundInterest)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LowerBoundInterest)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpperBoundInterest)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpperBoundInterest)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IncrementalRate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IncrementalRate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaturityYears)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaturityYears)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-    </dl>
+<h4>Projection Form</h4>
+<hr />
+<div class="row">
+    <div class="col-sm-12 col-md-4">
+        <dl class="row">
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.ID)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.PresetValue)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.PresetValue)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.LowerBoundInterest)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.LowerBoundInterest)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.UpperBoundInterest)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.UpperBoundInterest)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.IncrementalRate)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.IncrementalRate)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.MaturityYears)
+            </dt>
+            <dd class="col-sm-10 col-md-8">
+                @Html.DisplayFor(model => model.MaturityYears)
+            </dd>
+            <dt class="col-sm-2 col-md-4">
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </dt>
+            
+        </dl>
+    </div>
+    
+    <div class="col-sm-12 col-md-8">
+        <partial name="~/Views/ProjectionYear/Index.cshtml" model="@Model.Projections" />
+    </div>
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

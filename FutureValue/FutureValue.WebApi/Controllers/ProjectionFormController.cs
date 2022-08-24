@@ -35,6 +35,7 @@ namespace FutureValue.WebApi.Controllers
         {
             var result = unitOfWork.ProjectionFormRepository.Get(id);
             ProjectionFormDto dto = _mapper.Map<ProjectionFormDto>(result);
+            dto.Projections = new ProjectionLister().GenerateProjections(result);
             return Ok(dto);
         }
 

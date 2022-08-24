@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FutureValue.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace FutureValue.WebApi.DTO
 {
@@ -20,5 +21,6 @@ namespace FutureValue.WebApi.DTO
         public int MaturityYears { get; set; }
         public int? AspUserId { get; set; }
         public DateTimeOffset? DateCreated { get; set; }
+        public IEnumerable<ProjectionYear>? Projections { get; set; }
     }
 }

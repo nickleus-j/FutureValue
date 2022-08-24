@@ -26,5 +26,7 @@ namespace FutureValue.Web.ViewModels
         //public int? AspUserId { get; set; }
         [Display(Name = "Date Created", AutoGenerateFilter = false)]
         public DateTimeOffset? DateCreated { get; set; }
+
+        public IEnumerable<ProjectionYearViewModel>? Projections { get; set; }
     }
 }

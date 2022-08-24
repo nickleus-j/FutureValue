@@ -72,6 +72,8 @@ namespace FutureValue.Web.Controllers
                         readTask.Wait();
 
                         projetion = readTask.Result;
+
+                        
                     }
                     else //web api sent error response 
                     {
