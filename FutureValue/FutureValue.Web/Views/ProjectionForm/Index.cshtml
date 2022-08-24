@@ -6,10 +6,10 @@
 
 <h1>Some Projections</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="text-center text-capitalize">
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="TBL">
     <thead>
         <tr>
             <th>
@@ -63,11 +63,44 @@
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.ID  }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Edit", "Edit", new {id=item.ID},new {@class = "edit-link" }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.ID  },new {@class = "details-link" }) |
+                    <a href="#TBL" data-id="@item.ID" class="delete-link">Delete</a>
+                    @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ },new {@class = "delete-link" })*@
             </td>
         </tr>
 }
     </tbody>
 </table>
+@section Scripts {
+
+    <script>
+        var ProjectionIndex = {
+            OnDeleteLinkClick: function (id) {
+                var caller = new Service();
+                if (document.querySelector(".input-validation-error")) {
+                    return;
+                }
+                caller.delete(AppUrl + "api/ProjectionForm/" + id, {}, function (data) {
+                    window.location.href = '/ProjectionForm';
+
+                }, function (e) {
+                    console.log("error " + e);
+                });
+            },
+            AddClickEventToDeleteLink: function () {
+                let createButtons = document.querySelectorAll(".delete-link");
+                for(let i=0;i<createButtons.length;i++){
+                    let btnCreate = createButtons[i];
+                    btnCreate.addEventListener('click', function (e) {
+                        ProjectionIndex.OnDeleteLinkClick(e.target.getAttribute('data-id'));
+                    });
+                }
+                
+            }
+        };
+        window.onload = (event) => {
+            ProjectionIndex.AddClickEventToDeleteLink();
+        }
+    </script>
+}

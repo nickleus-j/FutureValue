@@ -11,7 +11,7 @@ var Service = (function () {
         var _this = this;
         this.request = function (options, successCallback, errorCallback) {
             var that = _this;
-            var args = options.method === "get" ? {
+            var args = options.method === "get" || options.method === "delete" ? {
                 method: options.method,
                 headers: { "Content-Type": "application/json; charset=utf-8" }
             } : {
@@ -39,6 +39,12 @@ var Service = (function () {
         };
         this.postWithData = function (url, data, successCallback, errorCallback) {
             _this.request(new Options(url, "post", data), successCallback, errorCallback);
+        };
+        this.putWithData = function (url, data, successCallback, errorCallback) {
+            _this.request(new Options(url, "put", data), successCallback, errorCallback);
+        };
+        this.delete = function (url, data, successCallback, errorCallback) {
+            _this.request(new Options(url, "delete", data), successCallback, errorCallback);
         };
     }
     return Service;

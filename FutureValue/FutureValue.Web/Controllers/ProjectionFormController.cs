@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FutureValue.Web.ViewModels;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+
 namespace FutureValue.Web.Controllers
 {
     public class ProjectionFormController : Controller
@@ -17,7 +21,7 @@ namespace FutureValue.Web.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(@Configuration["ApiBaseUrl"]+ "api/");
+                client.BaseAddress = new Uri(@Configuration["ApiBaseUrl"] + "api/");
                 //HTTP GET
                 var responseTask = client.GetAsync("ProjectionForm");
                 responseTask.Wait();
@@ -56,12 +60,11 @@ namespace FutureValue.Web.Controllers
         public ActionResult Details(int id)
         {
             ProjectionFormViewModel projetion = new ProjectionFormViewModel();
-
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(@Configuration["ApiBaseUrl"] + "api/");
                 //HTTP GET
-                var responseTask = client.GetAsync("ProjectionForm/"+id);
+                var responseTask = client.GetAsync("ProjectionForm/" + id);
                 responseTask.Wait();
                 try
                 {
@@ -73,7 +76,7 @@ namespace FutureValue.Web.Controllers
 
                         projetion = readTask.Result;
 
-                        
+
                     }
                     else //web api sent error response 
                     {
@@ -101,41 +104,49 @@ namespace FutureValue.Web.Controllers
             return View();
         }
 
-        // POST: ProjectionFormController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: ProjectionFormController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ProjectionFormViewModel projetion = new ProjectionFormViewModel();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(@Configuration["ApiBaseUrl"] + "api/");
+                //HTTP GET
+                var responseTask = client.GetAsync("ProjectionForm/" + id);
+                responseTask.Wait();
+                try
+                {
+                    var result = responseTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var readTask = result.Content.ReadFromJsonAsync<ProjectionFormViewModel>();
+                        readTask.Wait();
+
+                        projetion = readTask.Result;
+
+
+                    }
+                    else //web api sent error response 
+                    {
+                        //log response status here..
+
+                        ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                    }
+                    return View(projetion);
+                }
+                catch (NullReferenceException ne)
+                {
+                    return View(projetion);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+
+            }
         }
 
-        // POST: ProjectionFormController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: ProjectionFormController/Delete/5
         public ActionResult Delete(int id)

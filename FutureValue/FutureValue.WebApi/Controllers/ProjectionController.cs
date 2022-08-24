@@ -22,6 +22,7 @@ namespace FutureValue.WebApi.Controllers
         }
         // GET: api/<ProjectionController>
         [HttpGet]
+        [HttpPost]
         public IActionResult Get([FromBody] ProjectionFormDto dto)
         {
             ProjectionForm form = _mapper.Map<ProjectionForm>(dto);

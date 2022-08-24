@@ -17,6 +17,19 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
         {
 
         }
+        public override ProjectionForm Add(ProjectionForm entity)
+        {
+            entity.DateCreated = DateTimeOffset.Now;
+            return base.Add(entity);
+        }
+        public override ProjectionForm Update(ProjectionForm entity)
+        {
+            if (entity.DateCreated == null)
+            {
+                entity.DateCreated = DateTimeOffset.Now;
+            }
+            return base.Update(entity);
+        }
         public override IEnumerable<ProjectionForm> GetAll()
         {
             return Context.ProjectionForm.Where(f => f.IsActive);
