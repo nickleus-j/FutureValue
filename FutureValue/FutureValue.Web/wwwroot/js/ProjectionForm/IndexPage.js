@@ -8,7 +8,7 @@
             window.location.href = '/ProjectionForm';
 
         }, function (e) {
-            console.log("error " + e);
+            alert("error " + e);
         });
     },
     AddClickEventToDeleteLink: function () {

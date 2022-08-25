@@ -131,7 +131,23 @@ namespace FutureValue.Web.Controllers.Tests
         [Fact()]
         public void DeleteTest()
         {
-            Assert.True(false, "This test needs an implementation");
+            using (IWebDriver driver = new ChromeDriver())
+            {
+                driver.Navigate().GoToUrl(createUrl);
+
+                driver.FindElement(By.Name("PresetValue")).SendKeys("5000");
+                driver.FindElement(By.CssSelector(".Name")).SendKeys(" For Del " + DateTime.Now.ToShortDateString());
+                string createClick = "document.querySelector(\"a.btn-create\").click()";
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(createClick);
+                Waiter.wait(driver);
+                int newCreateCount= driver.FindElements(By.CssSelector("#TBL tbody tr")).Count();
+                string deleteScript = "let x=Array.from(document.querySelectorAll(\"#TBL tr\")).pop();" +
+                    "x.querySelector(\".delete-link\").click()";
+                js.ExecuteScript(deleteScript);
+                Waiter.wait(driver);
+                Assert.Equal(newCreateCount, driver.FindElements(By.CssSelector("#TBL tbody tr")).Count()+ 1);
+            }
         }
     }
 }
