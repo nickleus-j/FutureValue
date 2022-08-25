@@ -8,7 +8,7 @@
             window.location.href = '/ProjectionForm';
 
         }, function (e) {
-            alert("error " + e);
+            DomExtension.ShowModal("Error", "Delete Not Sucessful");
         });
     },
     AddClickEventToDeleteLink: function () {

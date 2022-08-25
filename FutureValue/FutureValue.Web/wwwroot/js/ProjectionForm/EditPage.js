@@ -29,7 +29,7 @@
             }
 
         }, function (e) {
-            console.log("error " + e);
+            DomExtension.ShowModal("Error in contacting Server", "Try again later "+e);
         });
     },
     OnEditButtonClick: function () {
@@ -51,6 +51,7 @@
 
         }, function (e) {
             console.log("error " + e);
+            DomExtension.ShowModal("Edit was not Saved", "Error " + e);
         });
     },
     AddClickEventToPreviewBtn: function () {

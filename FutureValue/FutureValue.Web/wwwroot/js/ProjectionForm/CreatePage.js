@@ -29,7 +29,7 @@
             }
 
         }, function (e) {
-            console.log("error " + e);
+            DomExtension.ShowModal("Error in contacting Server", "Try again later " + e);
         });
     },
     OnCreateButtonClick: function () {
@@ -50,7 +50,7 @@
             window.location.href = '/ProjectionForm';
 
         }, function (e) {
-            console.log("error " + e);
+            DomExtension.ShowModal("Form was not Saved", "Error " + e);
         });
     },
     AddClickEventToPreviewBtn: function () {
