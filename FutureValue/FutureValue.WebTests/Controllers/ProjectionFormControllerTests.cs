@@ -108,7 +108,24 @@ namespace FutureValue.Web.Controllers.Tests
                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                 js.ExecuteScript(script);
                 Waiter.wait(driver);
-                Assert.NotEqual(driver.Url, homeUrl);
+
+                var nameElem = driver.FindElement(By.CssSelector(".Name"));
+                string testName = "Edit " + DateTime.Now.ToString();
+                nameElem.Clear();
+                nameElem.SendKeys(testName);
+                string saveScript = "document.querySelector(\"a.btn-save\").click()";
+                js.ExecuteScript(saveScript);
+                Waiter.wait(driver);
+                Assert.Equal(testName, driver.FindElement(By.CssSelector("td.form-name")).Text);
+                
+                //Clean up
+                js.ExecuteScript(script);
+                Waiter.wait(driver);
+                nameElem = driver.FindElement(By.CssSelector(".Name"));
+                nameElem.Clear();
+                nameElem.SendKeys("Sample");
+                js.ExecuteScript(saveScript);
+                Waiter.wait(driver);
             }
         }
         [Fact()]

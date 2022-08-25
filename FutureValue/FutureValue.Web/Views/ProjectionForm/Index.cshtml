@@ -12,9 +12,7 @@
 <table class="table" id="TBL">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ID)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.PresetValue)
             </th>
@@ -38,37 +36,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PresetValue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowerBoundInterest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpperBoundInterest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IncrementalRate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaturityYears)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new {id=item.ID},new {@class = "edit-link" }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.ID  },new {@class = "details-link" }) |
-                    <a href="#TBL" data-id="@item.ID" class="delete-link">Delete</a>
-            </td>
-        </tr>
-}
+                <td class="preset-value">
+                    @Html.DisplayFor(modelItem => item.PresetValue)
+                </td>
+                <td class="form-name">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="lower-bound">
+                    @Html.DisplayFor(modelItem => item.LowerBoundInterest)
+                </td>
+                <td class="upper-bound">
+                    @Html.DisplayFor(modelItem => item.UpperBoundInterest)
+                </td>
+                <td class="increment">
+                    @Html.DisplayFor(modelItem => item.IncrementalRate)
+                </td>
+                <td class="Maturity">
+                    @Html.DisplayFor(modelItem => item.MaturityYears)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id=item.ID},new {@class = "edit-link btn btn-dark" }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.ID  },new {@class = "details-link btn btn-success" }) |
+                    <a href="#TBL" data-id="@item.ID" class="delete-link btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 @section Scripts {
