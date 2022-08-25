@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutureValue.Persistence.EfI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutureValue.Domain.Tests", "FutureValue.Domain.Tests\FutureValue.Domain.Tests.csproj", "{E79336C1-5918-44CA-B25D-5E2848F5FA2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureValue.WebApi", "FutureValue.WebApi\FutureValue.WebApi.csproj", "{38979F88-BE13-455C-8FCA-3E04E8E62F77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutureValue.WebApi", "FutureValue.WebApi\FutureValue.WebApi.csproj", "{38979F88-BE13-455C-8FCA-3E04E8E62F77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureValue.Web", "FutureValue.Web\FutureValue.Web.csproj", "{DDA4F69B-DBF0-4480-B00F-5CB1AF584C7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutureValue.Web", "FutureValue.Web\FutureValue.Web.csproj", "{DDA4F69B-DBF0-4480-B00F-5CB1AF584C7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutureValue.WebTests", "FutureValue.WebTests\FutureValue.WebTests.csproj", "{C11F75C1-5C2D-4D5B-AE03-38279CD160EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DDA4F69B-DBF0-4480-B00F-5CB1AF584C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDA4F69B-DBF0-4480-B00F-5CB1AF584C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDA4F69B-DBF0-4480-B00F-5CB1AF584C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11F75C1-5C2D-4D5B-AE03-38279CD160EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11F75C1-5C2D-4D5B-AE03-38279CD160EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11F75C1-5C2D-4D5B-AE03-38279CD160EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11F75C1-5C2D-4D5B-AE03-38279CD160EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
