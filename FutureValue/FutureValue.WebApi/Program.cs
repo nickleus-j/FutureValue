@@ -41,7 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors(x => x.AllowAnyHeader()
       .AllowAnyMethod()
-      .WithOrigins("https://localhost:7228"));
+      .SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost"));
 app.MapControllers();
 
 app.Run();
