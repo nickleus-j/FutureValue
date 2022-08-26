@@ -32,3 +32,6 @@
 /FutureValue/FutureValue.WebTests/bin/Debug/net6.0
 /FutureValue/FutureValue.WebTests/obj
 /FutureValue.Angular/.vs
+/FutureValue/FutureValue.Domain.Tests/bin/Release/net6.0/CoverletSourceRootsMapping
+/FutureValue/FutureValue.WebTests/bin/Release/net6.0/CoverletSourceRootsMapping
+/FutureValue.Angular/FutureValue.Angular/ClientApp/.angular/cache/13.3.4
