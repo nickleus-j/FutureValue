@@ -2,6 +2,7 @@
 
 <h4>Projection Form</h4>
 <hr />
+<form role="form" name="form">
 <div class="row">
   <div class="col-sm-12 col-md-4">
     <div class="form-group d-none">
@@ -12,7 +13,7 @@
 
     <div class="form-group">
       <label class="control-label" for="Name">Name</label>
-      <input class="form-control Name valid" [(ngModel)]="pForm.name" type="text" data-val="true" data-val-maxlength="The field Name must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" data-val-minlength="The field Name must be a string or array type with a minimum length of '1'." data-val-minlength-min="1" data-val-required="The Name field is required." id="Name" maxlength="100" name="Name" aria-describedby="Name-error" aria-invalid="false">
+      <input class="form-control Name valid" [(ngModel)]="pForm.name" type="text" data-val="true" data-val-maxlength="The field Name must be a string or array type with a maximum length of '100'." ng-maxlength="100" data-val-minlength="The field Name must be a string or array type with a minimum length of '1'." ng-minlength="1" data-val-required="The Name field is required." id="Name" maxlength="100" name="Name" aria-describedby="Name-error" aria-invalid="false">
       <span class="text-danger field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group">
@@ -47,7 +48,7 @@
     </div>
     <div class="form-group">
       <a class="btn btn-success btn-preview" (click)="onPreViewClick()">Preview</a>
-      <a class="btn btn-primary btn-create" (click)="onCreateClick()">Save</a>
+      <a class="btn btn-primary btn-create" (click)="onCreateClick()" ng-disabled="form.$invalid">Save</a>
     </div>
   </div>
   <div class="col-sm-12 col-md-8">
@@ -82,6 +83,7 @@
 
   </div>
 </div>
+  </form>
 <hr />
 
 <a class="details-link btn btn-success" [routerLink]="['/fv']">back</a>

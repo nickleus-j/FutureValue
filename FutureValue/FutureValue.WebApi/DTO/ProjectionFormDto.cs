@@ -1,6 +1,6 @@
 ﻿using FutureValue.Domain;
 using System.ComponentModel.DataAnnotations;
-
+using FutureValue.Domain.Attributes;
 namespace FutureValue.WebApi.DTO
 {
     public class ProjectionFormDto
@@ -12,6 +12,7 @@ namespace FutureValue.WebApi.DTO
         [MaxLength(100)]
         public string Name { get; set; }
         [Range(0.0, 1e9)]
+        [NumericLessThan("UpperBoundInterest", AllowEquality = true)]
         public decimal LowerBoundInterest { get; set; }
         [Range(0.0, 1e9)]
         public decimal UpperBoundInterest { get; set; }

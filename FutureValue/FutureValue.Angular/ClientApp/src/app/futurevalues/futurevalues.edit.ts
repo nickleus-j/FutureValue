@@ -68,10 +68,14 @@ export class FutureValuesEdit implements OnInit {
       maturityYears: pForm.maturityYears,
       dateCreated: pForm.dateCreated
     }
+    if (pForm.upperBoundInterest < pForm.lowerBoundInterest) {
+      alert("Upper Bound value  must never be lower than lower bound value");
+      return;
+    }
     this.http.post(this.Settings.AppUrl + 'api/Projection/', toSend).subscribe(
       {
         next: (response) => this.updateTable(response as ProjectionYear[]),
-        error: (error) => console.log(error),
+        error: (error) => alert(error.error.title),
       })
   }
   onSaveClick() {
@@ -86,10 +90,14 @@ export class FutureValuesEdit implements OnInit {
       maturityYears: pForm.maturityYears,
       dateCreated: new Date(pForm.dateCreated)
     }
+    if (pForm.upperBoundInterest < pForm.lowerBoundInterest) {
+      alert("Upper Bound value  must never be lower than lower bound value");
+      return;
+    }
     this.http.put(this.Settings.AppUrl + 'api/ProjectionForm/' + pForm.id, toSend).subscribe(
       {
         next: (response) => this.router.navigate(['/fv']),
-        error: (error) => console.log(error),
+        error: (error) => alert(error.error.title),
       });
   }
 }

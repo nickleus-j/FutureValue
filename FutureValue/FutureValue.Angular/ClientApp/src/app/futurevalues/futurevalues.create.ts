@@ -62,10 +62,14 @@ export class FutureValuesCreate implements OnInit {
       incrementalRate: pForm.incrementalRate,
       maturityYears: pForm.maturityYears,
     }
+    if (pForm.upperBoundInterest < pForm.lowerBoundInterest) {
+      alert("Upper Bound value  must never be lower than lower bound value");
+      return;
+    }
     this.http.post(this.Settings.AppUrl + 'api/Projection/', toSend).subscribe(
       {
         next: (response) => this.updateTable(response as ProjectionYear[]),
-        error: (error) => console.log(error),
+        error: (error) => alert(error.error.title),
       })
   }
   onCreateClick() {
@@ -79,10 +83,14 @@ export class FutureValuesCreate implements OnInit {
       incrementalRate: pForm.incrementalRate,
       maturityYears: pForm.maturityYears,
     }
+    if (pForm.upperBoundInterest < pForm.lowerBoundInterest) {
+      alert("Upper Bound value  must never be lower than lower bound value");
+      return;
+    }
     this.http.post(this.Settings.AppUrl + 'api/ProjectionForm/', toSend).subscribe(
       {
         next: (response) => this.router.navigate(['/fv']),
-        error: (error) => console.log(error),
+        error: (error) => alert(error.error.title),
       });
   }
 
