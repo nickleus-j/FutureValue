@@ -1,0 +1,60 @@
+<h1>Some Projections</h1>
+<p class="text-center text-capitalize">
+    <a class="btn btn-primary" [routerLink]="['/fvcreate']">Create New</a>
+</p>
+
+<table class="table" id="TBL">
+    <thead>
+        <tr>
+            <th>
+                Preset Value
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Lower Bound Interest
+            </th>
+            <th>
+                Upper Bound Interest
+            </th>
+            <th>
+                Incremental Rate
+            </th>
+            <th>
+                Maturity Years
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of this.forms;let i=index">
+            <td class="preset-value">
+                {{item.presetValue}}
+            </td>
+            <td class="form-name">
+                {{item.name}}
+            </td>
+            <td class="lower-bound">
+                {{item.lowerBoundInterest}}
+            </td>
+            <td class="upper-bound">
+                {{item.upperBoundInterest}}
+            </td>
+            <td class="increment">
+                {{item.incrementalRate}}
+            </td>
+            <td class="Maturity">
+                {{item.maturityYears}}
+            </td>
+
+            <td>
+                <a class="edit-link btn btn-dark" [routerLink]="['/fvedit',item.id]">Edit</a> |
+                <a class="details-link btn btn-success" [routerLink]="['/fv',item.id]">Details</a>    | 
+                <!-- <a class="details-link btn btn-success" href="/ProjectionForm/Details/1">Details</a> | -->
+                <a class="delete-link btn btn-danger" href="/fv" (click)="onDelete(item.id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

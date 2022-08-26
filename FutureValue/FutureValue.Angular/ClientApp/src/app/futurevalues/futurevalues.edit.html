@@ -1,0 +1,85 @@
+<h1>{{this.headText}}</h1>
+
+<h4>Projection Form</h4>
+<hr/>
+<div class="row">
+    <div class="col-sm-12 col-md-4">
+        
+    </div>
+    <div class="col-sm-12 col-md-8">
+        
+        <div class="form-group d-none">
+            <label class="control-label" for="ID">ID</label>
+            <input class="form-control" type="hidden" [(ngModel)]="pForm.id"  data-val="true" data-val-required="The ID field is required." id="ID" name="ID">
+            <span class="text-danger field-validation-valid" data-valmsg-for="ID" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="Name">Name</label>
+            <input class="form-control Name valid" [(ngModel)]="pForm.name" type="text" data-val="true" data-val-maxlength="The field Name must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" data-val-minlength="The field Name must be a string or array type with a minimum length of '1'." data-val-minlength-min="1" data-val-required="The Name field is required." id="Name" maxlength="100" name="Name" aria-describedby="Name-error" aria-invalid="false">
+            <span class="text-danger field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="PresetValue">Preset Value</label>
+            <input class="form-control PresetValue" [(ngModel)]="pForm.presetValue"  type="text" data-val="true" data-val-number="The field Preset Value must be a number." data-val-range="The field Preset Value must be between 0 and 1000000000000." data-val-range-max="1000000000000" data-val-range-min="0" data-val-required="The Preset Value field is required." id="PresetValue" name="PresetValue">
+            <span class="text-danger field-validation-valid" data-valmsg-for="PresetValue" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="LowerBoundInterest">Lower Bound Interest</label>
+            <input class="form-control LowerBoundInterest valid" [(ngModel)]="pForm.lowerBoundInterest" type="text" data-val="true" data-val-number="The field Lower Bound Interest must be a number." data-val-range="The field Lower Bound Interest must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Lower Bound Interest field is required." id="LowerBoundInterest" name="LowerBoundInterest" aria-describedby="LowerBoundInterest-error" aria-invalid="false">
+            <span class="text-danger field-validation-valid" data-valmsg-for="LowerBoundInterest" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="UpperBoundInterest">Upper Bound Interest</label>
+            <input class="form-control UpperBoundInterest" [(ngModel)]="pForm.upperBoundInterest" type="text" data-val="true" data-val-number="The field Upper Bound Interest must be a number." data-val-range="The field Upper Bound Interest must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Upper Bound Interest field is required." id="UpperBoundInterest" name="UpperBoundInterest">
+            <span class="text-danger field-validation-valid" data-valmsg-for="UpperBoundInterest" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="IncrementalRate">Incremental Rate</label>
+            <input class="form-control IncrementalRate" [(ngModel)]="pForm.incrementalRate" type="text" data-val="true" data-val-number="The field Incremental Rate must be a number." data-val-range="The field Incremental Rate must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Incremental Rate field is required." id="IncrementalRate" name="IncrementalRate">
+            <span class="text-danger field-validation-valid" data-valmsg-for="IncrementalRate" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="MaturityYears">Maturity Years</label>
+            <input class="form-control MaturityYears valid" [(ngModel)]="pForm.maturityYears" type="number" data-val="true" data-val-range="The field Maturity Years must be between 1 and 2147483647." data-val-range-max="2147483647" data-val-range-min="1" data-val-required="The Maturity Years field is required." id="MaturityYears" name="MaturityYears" aria-describedby="MaturityYears-error" aria-invalid="false">
+            <span class="text-danger field-validation-valid" data-valmsg-for="MaturityYears" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group d-none">
+            <label class="control-label hidden" for="DateCreated">Date Created</label>
+            <input class="form-control" type="hidden" [(ngModel)]="pForm.dateCreated" id="DateCreated" name="DateCreated">
+            <span class="text-danger field-validation-valid" data-valmsg-for="DateCreated" data-valmsg-replace="true"></span>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-success btn-preview" (click)="onPreViewClick()">Preview</a>
+            <a class="btn btn-primary btn-create" (click)="onSaveClick()">Save</a>
+        </div>
+        <table class="table projection-tbl">
+            <thead>
+                <tr>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Start Value
+                    </th>
+                    <th>
+                        Interest Rate
+                    </th>
+                    <th>
+                        Future Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of this.pForm.projections ;let i=index">
+                    <td>{{item.year}}</td>
+                    <td>{{item.startValue}}</td>
+                    <td>{{item.interestRate}}</td>
+                    <td>{{item.futureValue}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="details-link btn btn-success" [routerLink]="['/fv']">back</a>   
+        <hr/>
+            </div>
+</div>
