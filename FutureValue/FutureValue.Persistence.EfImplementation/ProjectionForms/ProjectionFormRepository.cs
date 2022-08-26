@@ -8,6 +8,7 @@ using FutureValue.Persistence.ProjectionForms;
 using FutureValue.Persistence.EfImplementation.Shared;
 using Microsoft.EntityFrameworkCore;
 using FutureValue.Domain.Entities;
+using FutureValue.Domain.Exceptions;
 
 namespace FutureValue.Persistence.EfImplementation.ProjectionForms
 {
@@ -20,6 +21,10 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
         public override ProjectionForm Add(ProjectionForm entity)
         {
             entity.DateCreated = DateTimeOffset.Now;
+            if (entity.UpperBoundInterest < entity.LowerBoundInterest)
+            {
+                throw new InvalidBoundsException();
+            }
             return base.Add(entity);
         }
         public override ProjectionForm Update(ProjectionForm entity)
@@ -27,6 +32,10 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
             if (entity.DateCreated == null)
             {
                 entity.DateCreated = DateTimeOffset.Now;
+            }
+            if (entity.UpperBoundInterest < entity.LowerBoundInterest)
+            {
+                throw new InvalidBoundsException();
             }
             return base.Update(entity);
         }

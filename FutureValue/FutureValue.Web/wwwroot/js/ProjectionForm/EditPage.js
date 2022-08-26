@@ -1,7 +1,11 @@
 ﻿var ProjectionIndex = {
     OnPreviewButtonClick: function () {
         var caller = new Service();
-        if (document.querySelector(".input-validation-error")) {
+        if (document.querySelector(".input-validation-error") || document.querySelector(".text-danger span")) {
+            return;
+        }
+        if (parseFloat(document.querySelector(".UpperBoundInterest").value) < parseFloat(document.querySelector(".LowerBoundInterest").value)) {
+            DomExtension.ShowModal("Error", "Upper Bound value  must never be lower than lower bound value");
             return;
         }
         caller.postWithData(AppUrl + "api/Projection", {
@@ -34,7 +38,11 @@
     },
     OnEditButtonClick: function () {
         var caller = new Service();
-        if (document.querySelector(".input-validation-error")) {
+        if (document.querySelector(".input-validation-error") || document.querySelector(".text-danger span")) {
+            return;
+        }
+        if (parseFloat(document.querySelector(".UpperBoundInterest").value) < parseFloat(document.querySelector(".LowerBoundInterest").value)) {
+            DomExtension.ShowModal("Error", "Upper Bound value  must never be lower than lower bound value");
             return;
         }
         caller.putWithData(AppUrl + "api/ProjectionForm/" + document.querySelector(".formId").value, {
@@ -47,8 +55,12 @@
             "maturityYears": parseFloat(document.querySelector(".MaturityYears").value),
             "dateCreated": new Date(document.querySelector(".DateCreated").value)
         }, function (data) {
-            window.location.href = '/ProjectionForm';
-
+            if (data) {
+                window.location.href = '/ProjectionForm';
+            }
+            else {
+                DomExtension.ShowModal("Form was not Saved", "Error ");
+            }
         }, function (e) {
             console.log("error " + e);
             DomExtension.ShowModal("Edit was not Saved", "Error " + e);

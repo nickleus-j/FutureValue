@@ -1,7 +1,11 @@
 ﻿var ProjectionCreate = {
     OnPreviewButtonClick: function () {
         var caller = new Service();
-        if (document.querySelector(".input-validation-error")) {
+        if (document.querySelector(".input-validation-error") || document.querySelector(".text-danger span")) {
+            return;
+        }
+        if (parseFloat(document.querySelector(".UpperBoundInterest").value) < parseFloat(document.querySelector(".LowerBoundInterest").value)) {
+            DomExtension.ShowModal("Error", "Upper Bound value  must never be lower than lower bound value");
             return;
         }
         caller.postWithData(AppUrl + "api/Projection", {
@@ -14,7 +18,9 @@
             "maturityYears": parseFloat(document.querySelector(".MaturityYears").value),
             "dateCreated": "2022-08-24T23:25:36.345Z"
         }, function (data) {
-            let panel = document.querySelector(".projection-panel");
+            if (data == undefined || data == null) {
+                DomExtension.ShowModal("Form was not Saved", "Error ");
+            }
             let tbl = document.querySelector(".projection-tbl");
             let tBody = tbl.querySelector("tbody");
             tbl.classList.remove("d-none");
@@ -34,7 +40,11 @@
     },
     OnCreateButtonClick: function () {
         var caller = new Service();
-        if (document.querySelector(".input-validation-error")) {
+        if (document.querySelector(".input-validation-error") || document.querySelector(".text-danger span")) {
+            return;
+        }
+        if (parseFloat(document.querySelector(".UpperBoundInterest").value) < parseFloat(document.querySelector(".LowerBoundInterest").value)) {
+            DomExtension.ShowModal("Error", "Upper Bound value  must never be lower than lower bound value");
             return;
         }
         caller.postWithData(AppUrl + "api/ProjectionForm", {
@@ -47,7 +57,12 @@
             "maturityYears": parseFloat(document.querySelector(".MaturityYears").value),
             "dateCreated": "2022-08-24T23:25:36.345Z"
         }, function (data) {
-            window.location.href = '/ProjectionForm';
+            if (data) {
+                window.location.href = '/ProjectionForm';
+            }
+            else {
+                DomExtension.ShowModal("Form was not Saved", "Error ");
+            }
 
         }, function (e) {
             DomExtension.ShowModal("Form was not Saved", "Error " + e);

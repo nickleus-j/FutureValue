@@ -20,7 +20,12 @@ var Service = (function () {
                 body: JSON.stringify(options.data)
             };
             fetch(options.url, args)
-                .then(function (res) { return res.json(); }) // parse response as JSON (can be res.text() for plain response)
+                .then(function (res) {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    return errorCallback(res.json());
+                }) // parse response as JSON (can be res.text() for plain response)
                 .then(function (response) {
                     successCallback(response);
                 })

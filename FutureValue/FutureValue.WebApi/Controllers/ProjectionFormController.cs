@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using FutureValue.Domain;
 using FutureValue.Domain.Entities;
+using FutureValue.Domain.Exceptions;
 using FutureValue.Persistence.Shared;
 using FutureValue.WebApi.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,7 +47,15 @@ namespace FutureValue.WebApi.Controllers
         public IActionResult Post([FromBody] ProjectionFormDto dto)
         {
             ProjectionForm entity = _mapper.Map<ProjectionForm>(dto);
-            unitOfWork.ProjectionFormRepository.Add(entity);
+            
+            try
+            {
+                unitOfWork.ProjectionFormRepository.Add(entity);
+            }
+            catch (InvalidBoundsException ibe)
+            {
+                return StatusCode(500,new ErrorDto("Invalid Bounds", ibe.Message));
+            }
             unitOfWork.Save();
             return Ok(_mapper.Map<ProjectionFormDto>(entity));
         }
@@ -55,7 +65,14 @@ namespace FutureValue.WebApi.Controllers
         public IActionResult Put(int id,[FromBody] ProjectionFormDto dto)
         {
             ProjectionForm entity = _mapper.Map<ProjectionForm>(dto);
-            unitOfWork.ProjectionFormRepository.Update(entity);
+            try
+            {
+                unitOfWork.ProjectionFormRepository.Update(entity);
+            }catch (InvalidBoundsException ibe)
+            {
+                return BadRequest(new ErrorDto("Invalid Bounds", ibe.Message));
+            }
+            
             unitOfWork.Save();
             return Ok(dto);
         }
