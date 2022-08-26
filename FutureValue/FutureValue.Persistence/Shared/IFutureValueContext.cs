@@ -1,4 +1,4 @@
-﻿using FutureValue.Domain;
+﻿using FutureValue.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;

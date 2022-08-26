@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FutureValue.Domain;
+using FutureValue.Domain.Entities;
 using FutureValue.Persistence.Shared;
 using FutureValue.WebApi.DTO;
 using Microsoft.AspNetCore.Http;

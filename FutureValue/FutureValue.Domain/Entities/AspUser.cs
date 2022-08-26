@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace FutureValue.Domain
+namespace FutureValue.Domain.Entities
 {
     public class AspUser
     {

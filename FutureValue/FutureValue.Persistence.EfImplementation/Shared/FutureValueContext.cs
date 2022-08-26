@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using FutureValue.Persistence.Shared;
-using FutureValue.Domain;
+using FutureValue.Domain.Entities;
 
 namespace FutureValue.Persistence.EfImplementation.Shared
 {

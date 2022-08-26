@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FutureValue.Domain;
+using FutureValue.Domain.Entities;
 using FutureValue.WebApi.DTO;
 using System;
 using System.Collections.Generic;

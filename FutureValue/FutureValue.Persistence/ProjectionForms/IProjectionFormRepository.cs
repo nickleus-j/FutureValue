@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FutureValue.Domain;
+using FutureValue.Domain.Entities;
 using FutureValue.Persistence.Shared;
 
 namespace FutureValue.Persistence.ProjectionForms

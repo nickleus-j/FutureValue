@@ -1,4 +1,5 @@
-using FutureValue.Domain;
+using FutureValue.Domain.Entities;
+
 namespace FutureValue.Domain.Tests
 {
     public class ProjectionListerTests
