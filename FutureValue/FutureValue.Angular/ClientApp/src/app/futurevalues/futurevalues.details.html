@@ -67,9 +67,9 @@
     <tbody>
         <tr *ngFor="let item of this.pForm.projections ;let i=index">
             <td>{{item.year}}</td>
-            <td>{{item.startValue}}</td>
-            <td>{{item.interestRate}}</td>
-            <td>{{item.futureValue}}</td>
+            <td>{{item.startValue.toFixed(2)}}</td>
+            <td>{{item.interestRate.toFixed(2)}}</td>
+            <td>{{item.futureValue.toFixed(2)}}</td>
         </tr>
     </tbody>
 </table>

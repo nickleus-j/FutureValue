@@ -43,9 +43,9 @@ export class FutureValuesCreate implements OnInit {
       for (let i = 0; i < response.length; i++) {
         let row = document.createElement("tr");
         row.appendChild(this.MakeElement("td", "" + response[i].year));
-        row.appendChild(this.MakeElement("td", "" + response[i].startValue));
-        row.appendChild(this.MakeElement("td", "" + response[i].interestRate));
-        row.appendChild(this.MakeElement("td", "" + response[i].futureValue));
+        row.appendChild(this.MakeElement("td", "" + response[i].startValue.toFixed(2)));
+        row.appendChild(this.MakeElement("td", "" + response[i].interestRate.toFixed(2)));
+        row.appendChild(this.MakeElement("td", "" + response[i].futureValue.toFixed(2)));
         tBody.appendChild(row);
       }
     }
