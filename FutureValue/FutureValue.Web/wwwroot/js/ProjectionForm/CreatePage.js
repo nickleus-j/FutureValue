@@ -28,9 +28,9 @@
             for (let i = 0; i < data.length; i++) {
                 let row = document.createElement("tr");
                 row.appendChild(DomExtension.MakeElement("td", "" + data[i].year));
-                row.appendChild(DomExtension.MakeElement("td", "" + data[i].startValue));
-                row.appendChild(DomExtension.MakeElement("td", "" + data[i].interestRate));
-                row.appendChild(DomExtension.MakeElement("td", "" + data[i].futureValue));
+                row.appendChild(DomExtension.MakeElement("td", "" + data[i].startValue.toFixed(2)));
+                row.appendChild(DomExtension.MakeElement("td", "" + data[i].interestRate.toFixed(2)));
+                row.appendChild(DomExtension.MakeElement("td", "" + data[i].futureValue.toFixed(2)));
                 tBody.appendChild(row);
             }
 

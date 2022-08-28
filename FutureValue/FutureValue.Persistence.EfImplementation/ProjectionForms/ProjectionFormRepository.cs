@@ -57,7 +57,7 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
 
         public IEnumerable<ProjectionForm> GetForms(DateTimeOffset startDate, DateTimeOffset? endDate, int page = 1, int pageSize = 10)
         {
-            return Context.ProjectionForm.Where(form => form.DateCreated >= startDate&&(!endDate.HasValue|| form.DateCreated <= endDate.Value))
+            return Context.ProjectionForm.Where(form => form.DateCreated >= startDate&&(!endDate.HasValue|| form.DateCreated <= endDate.Value)&&form.IsActive==true)
                    .Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
         

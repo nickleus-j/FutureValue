@@ -47,13 +47,13 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td class="lower-bound">
-                    @Html.DisplayFor(modelItem => item.LowerBoundInterest)
+                    @($"{item.LowerBoundInterest:0.##}")
                 </td>
                 <td class="upper-bound">
-                    @Html.DisplayFor(modelItem => item.UpperBoundInterest)
+                    @($"{item.UpperBoundInterest:0.##}")
                 </td>
                 <td class="increment">
-                    @Html.DisplayFor(modelItem => item.IncrementalRate)
+                    @($"{item.IncrementalRate:0.##}")
                 </td>
                 <td class="Maturity">
                     @Html.DisplayFor(modelItem => item.MaturityYears)
