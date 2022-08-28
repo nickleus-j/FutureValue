@@ -63,5 +63,11 @@ Afterwards, the Angular can be debugged and built. It might take a while to rest
 
 That ends building the Angular project.
 
+## More notes on the Presentation projects
+They do not reference the other dlls/csproj. What is important for these projects to show data is the right base URL address. The intention of not referenceing the dlls is to attempt to present all the data via API calls.
+
 ## About the Test projects
-The test projects are made with xUnit. The Domain has a test project to test the projections of future values. The Mvc also has a test project where Selinium web driver is used to check the contents of the site generated.
+* The test projects are made with xUnit. 
+* The Domain has a test project to test the projections of future values. 
+* The EfImplementation uses in memory database to generate test data.
+* The Mvc also has a test project where Selinium web driver is used to check the contents of the site generated.
