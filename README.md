@@ -6,6 +6,12 @@ Need the following
 * Recommend Visual studio 2022 since the steps here are from Visual Studio
 * Git for cloning the repository(recommend Main branch for initial build)
 After installing Visual Studio 2022 and Setting up Sql server instance, the solution should available for debugging and tinkering. The first csproj to build is the web API. The MVC(FutureValue.Web) and Angular(FutureValue.Angular) must be built after API.
+## Start with the API project
+The presentation projects both depend on the API project. The API has to be running for the presentation project to show data. Alternatively, the API project can be deployed somewhere and the presentation projects can just reference the URL of the API.
+## Environment variables
+Certain Environment variables can be used to configure the API project. User secrets and appsettings.json can also contain these configuration values The variables are the following
+* FvDb: Connection string to the database
+* AllowedOrigins: hosts of origins allowed for CORS
 ## Build and Debug API project (FutureValue.WebApi)
 Connection string will only be needed to be configured on API project(FutureValue.WebApi)
 Use user secrets to add connection strings.
@@ -56,4 +62,4 @@ They do not reference the other dlls/csproj. What is important for these project
 * The test projects are made with xUnit. 
 * The Domain has a test project to test the projections of future values. 
 * The EfImplementation uses in memory database to generate test data.
-* Selenium web driver is used in the MVC presentation project to check the contents of the site generated.
+* Selenium web driver is used in the MVC and Angular presentation projects to check the contents of the site generated.
