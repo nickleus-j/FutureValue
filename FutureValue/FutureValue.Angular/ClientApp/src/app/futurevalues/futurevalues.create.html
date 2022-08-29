@@ -52,34 +52,7 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-8">
-
-
-    <table class="table projection-tbl">
-      <thead>
-        <tr>
-          <th>
-            Year
-          </th>
-          <th>
-            Start Value
-          </th>
-          <th>
-            Interest Rate
-          </th>
-          <th>
-            Future Value
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of this.pForm.projections ;let i=index">
-          <td>{{item.year}}</td>
-          <td>{{item.startValue}}</td>
-          <td>{{item.interestRate}}</td>
-          <td>{{item.futureValue}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <fv-projections [data]="this.pForm.projections"></fv-projections>
 
   </div>
 </div>

@@ -22,12 +22,12 @@
     </div>
     <div class="form-group">
       <label class="control-label" for="LowerBoundInterest">Lower Bound Interest</label>
-      <input class="form-control LowerBoundInterest valid" [(ngModel)]="pForm.lowerBoundInterest" type="text" data-val="true" data-val-number="The field Lower Bound Interest must be a number." data-val-range="The field Lower Bound Interest must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Lower Bound Interest field is required." id="LowerBoundInterest" name="LowerBoundInterest" aria-describedby="LowerBoundInterest-error" aria-invalid="false">
+      <input matInput  class="form-control LowerBoundInterest valid" [(ngModel)]="pForm.lowerBoundInterest" type="text" data-val="true" data-val-number="The field Lower Bound Interest must be a number." data-val-range="The field Lower Bound Interest must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Lower Bound Interest field is required." id="LowerBoundInterest" name="LowerBoundInterest" aria-describedby="LowerBoundInterest-error" aria-invalid="false">
       <span class="text-danger field-validation-valid" data-valmsg-for="LowerBoundInterest" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group">
       <label class="control-label" for="UpperBoundInterest">Upper Bound Interest</label>
-      <input class="form-control UpperBoundInterest" [(ngModel)]="pForm.upperBoundInterest" type="text" data-val="true" data-val-number="The field Upper Bound Interest must be a number." data-val-range="The field Upper Bound Interest must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Upper Bound Interest field is required." id="UpperBoundInterest" name="UpperBoundInterest">
+      <input  class="form-control UpperBoundInterest" [(ngModel)]="pForm.upperBoundInterest" type="text" data-val="true" data-val-number="The field Upper Bound Interest must be a number." data-val-range="The field Upper Bound Interest must be between 0 and 1000000000." data-val-range-max="1000000000" data-val-range-min="0" data-val-required="The Upper Bound Interest field is required." id="UpperBoundInterest" name="UpperBoundInterest">
       <span class="text-danger field-validation-valid" data-valmsg-for="UpperBoundInterest" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group">
@@ -37,7 +37,7 @@
     </div>
     <div class="form-group">
       <label class="control-label" for="MaturityYears">Maturity Years</label>
-      <input class="form-control MaturityYears valid" [(ngModel)]="pForm.maturityYears" type="number" data-val="true" data-val-range="The field Maturity Years must be between 1 and 2147483647." data-val-range-max="2147483647" data-val-range-min="1" data-val-required="The Maturity Years field is required." id="MaturityYears" name="MaturityYears" aria-describedby="MaturityYears-error" aria-invalid="false">
+      <input matInput  class="form-control MaturityYears valid" [(ngModel)]="pForm.maturityYears" type="number" data-val="true" data-val-range="The field Maturity Years must be between 1 and 2147483647." data-val-range-max="2147483647" data-val-range-min="1" data-val-required="The Maturity Years field is required." id="MaturityYears" name="MaturityYears" aria-describedby="MaturityYears-error" aria-invalid="false">
       <span class="text-danger field-validation-valid" data-valmsg-for="MaturityYears" data-valmsg-replace="true"></span>
     </div>
     <div class="form-group d-none">
@@ -53,32 +53,7 @@
   <div class="col-sm-12 col-md-8">
 
 
-    <table class="table projection-tbl">
-      <thead>
-        <tr>
-          <th>
-            Year
-          </th>
-          <th>
-            Start Value
-          </th>
-          <th>
-            Interest Rate
-          </th>
-          <th>
-            Future Value
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of this.pForm.projections ;let i=index">
-          <td>{{item.year}}</td>
-          <td>{{item.startValue}}</td>
-          <td>{{item.interestRate}}</td>
-          <td>{{item.futureValue}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <fv-projections [data]="this.pForm.projections"></fv-projections>
     <a class="details-link btn btn-success" [routerLink]="['/fv']">back</a>
     <hr />
   </div>
