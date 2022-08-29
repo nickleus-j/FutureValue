@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { projectionForm } from './projectionform';
 import { AppSettings } from './AppSettings';
 import { ProjectionYear } from './projectionYear';
+import { FutureValuesUiRoutines } from './futurevalues.UiRoutines'
+
 @Component({
   selector: 'fv-edit',
   templateUrl: './futurevalues.edit.html',
@@ -33,50 +35,9 @@ export class FutureValuesEdit implements OnInit {
       this.pForm = data;
     });
   }
-  MakeElement(tagName: string, text: string) {
-    let elem = document.createElement(tagName);
-    elem.append(text);
-    return elem;
-  }
-  updateTable(response: ProjectionYear[]) {
-    this.pForm.projections = response as ProjectionYear[];
-    let tbl = (<HTMLElement>this.ElByClassName.nativeElement).querySelector(".projection-tbl");
-    let tBody = (<HTMLElement>this.ElByClassName.nativeElement).querySelector(".projection-tbl tbody");
-    if (tbl && tBody) {
-      tbl.classList.remove("d-none");
-      tBody.innerHTML = "";
-      for (let i = 0; i < response.length; i++) {
-        let row = document.createElement("tr");
-        row.appendChild(this.MakeElement("td", "" + response[i].year));
-        row.appendChild(this.MakeElement("td", "" + response[i].startValue.toFixed(2)));
-        row.appendChild(this.MakeElement("td", "" + response[i].interestRate.toFixed(2)));
-        row.appendChild(this.MakeElement("td", "" + response[i].futureValue.toFixed(2)));
-        tBody.appendChild(row);
-      }
-    }
-
-  }
+  
   onPreViewClick() {
-    var pForm = this.pForm;
-    let toSend = {
-      id: pForm.id,
-      presetValue: pForm.presetValue,
-      name: pForm.name,
-      lowerBoundInterest: pForm.lowerBoundInterest,
-      upperBoundInterest: pForm.upperBoundInterest,
-      incrementalRate: pForm.incrementalRate,
-      maturityYears: pForm.maturityYears,
-      dateCreated: pForm.dateCreated
-    }
-    if (pForm.upperBoundInterest < pForm.lowerBoundInterest) {
-      alert("Upper Bound value  must never be lower than lower bound value");
-      return;
-    }
-    this.http.post(this.Settings.AppUrl + 'api/Projection/', toSend).subscribe(
-      {
-        next: (response) => this.updateTable(response as ProjectionYear[]),
-        error: (error) => alert(error.error.title),
-      })
+    FutureValuesUiRoutines.RegeneratePreviewTable(this.pForm, this.http, this.ElByClassName);
   }
   onSaveClick() {
     var pForm = this.pForm;
@@ -90,7 +51,7 @@ export class FutureValuesEdit implements OnInit {
       maturityYears: pForm.maturityYears,
       dateCreated: new Date(pForm.dateCreated)
     }
-    if (pForm.upperBoundInterest < pForm.lowerBoundInterest) {
+    if (!FutureValuesUiRoutines.isHtmlFormReadyForApi('' + pForm.upperBoundInterest, '' + pForm.lowerBoundInterest)) {
       alert("Upper Bound value  must never be lower than lower bound value");
       return;
     }
