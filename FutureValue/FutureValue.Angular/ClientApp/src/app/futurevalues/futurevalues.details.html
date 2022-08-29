@@ -47,33 +47,8 @@
     <div class="col-sm-12 col-md-8">
         
 
-<table class="table projection-tbl">
-    <thead>
-        <tr>
-            <th>
-                Year
-            </th>
-            <th>
-                Start Value
-            </th>
-            <th>
-                Interest Rate
-            </th>
-            <th>
-                Future Value
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of this.pForm.projections ;let i=index">
-            <td>{{item.year}}</td>
-            <td>{{item.startValue}}</td>
-            <td>{{item.interestRate}}</td>
-            <td>{{item.futureValue}}</td>
-        </tr>
-    </tbody>
-</table>
-<a class="details-link btn btn-success" [routerLink]="['/fv']">back</a>   
+      <fv-projections [data]="this.pForm.projections"></fv-projections>
+<a class="details-link btn btn-success" [routerLink]="['/fv']">back</a>
 <hr/>
     </div>
 </div>

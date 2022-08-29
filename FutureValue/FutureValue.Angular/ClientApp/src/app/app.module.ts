@@ -8,24 +8,27 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
+import { FutureValuesProjectionTable } from './futurevalues/futurevalues.ProjectionTable';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FutureValuesIndex } from './futurevalues/futurevalues.index';
 import { FutureValuesDetails } from "./futurevalues/futurevalues.details"
 import { FutureValuesCreate } from './futurevalues/futurevalues.create';
 import { FutureValuesEdit } from './futurevalues/futurevalues.edit';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent, FutureValuesIndex, FutureValuesDetails, FutureValuesCreate, FutureValuesEdit
+    CounterComponent,  FutureValuesProjectionTable,
+    FetchDataComponent, FutureValuesIndex, FutureValuesDetails
+    , FutureValuesCreate, FutureValuesEdit
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
     RouterModule.forRoot([
       { path: '', component: FutureValuesIndex, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -37,6 +40,6 @@ import { FutureValuesEdit } from './futurevalues/futurevalues.edit';
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, FutureValuesProjectionTable]
 })
 export class AppModule { }
