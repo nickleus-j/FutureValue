@@ -9,6 +9,7 @@ namespace FutureValue.Web.ViewModels
         [Display(Name = "Preset Value", AutoGenerateFilter = false)]
         public decimal PresetValue { get; set; }
         [MinLength(1)]
+        [Required]
         [MaxLength(100)]
         public string Name { get; set; }
         [Range(0.0, 1e9)]

@@ -99,6 +99,51 @@ namespace FutureValue.Web.Controllers.Tests
             }
         }
         [Fact()]
+        public void Create_TestLbankFields()
+        {
+            using (IWebDriver driver = new ChromeDriver())
+            {
+                driver.Navigate().GoToUrl(createUrl);
+
+                driver.FindElement(By.Name("PresetValue")).SendKeys("5000");
+                driver.FindElement(By.CssSelector(".Name")).Clear();
+                string createClick = "document.querySelector(\"a.btn-create\").click()";
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(createClick);
+                Waiter.wait(driver);
+                Assert.True(driver.FindElement(By.CssSelector(".d-block")).Enabled);
+
+                driver.FindElement(By.CssSelector(".Name")).SendKeys("making this");
+                driver.FindElement(By.Name("PresetValue")).Clear();
+                Waiter.wait(driver);
+                js.ExecuteScript(createClick);
+                Waiter.wait(driver);
+                Assert.True(driver.FindElement(By.CssSelector(".d-block")).Enabled);
+            }
+        }
+        [Fact()]
+        public void Create_TestNegativeNumber()
+        {
+            using (IWebDriver driver = new ChromeDriver())
+            {
+                driver.Navigate().GoToUrl(createUrl);
+                Assert.True(driver.FindElement(By.Id("PresetValue")).Enabled);
+                Assert.True(driver.FindElement(By.TagName("form")).Enabled);
+                Assert.True(driver.FindElement(By.CssSelector(".Name")).Enabled);
+                Assert.True(driver.FindElement(By.CssSelector(".btn-create")).Enabled);
+
+                driver.FindElement(By.Name("PresetValue")).Clear();
+                driver.FindElement(By.Name("PresetValue")).SendKeys("-5000");
+                driver.FindElement(By.CssSelector(".Name")).SendKeys(" " + DateTime.Now.ToString());
+                string previewScript = "document.querySelector(\"a.btn-preview\").click()";
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(previewScript);
+                Assert.True(driver.FindElement(By.Id("PresetValue-error")).Enabled);
+                Waiter.wait(driver, 1500, 2000);
+                Assert.True(driver.FindElement(By.CssSelector(".d-block")).Enabled);
+            }
+        }
+        [Fact()]
         public void EditTest()
         {
             using (IWebDriver driver = new ChromeDriver())
@@ -143,6 +188,26 @@ namespace FutureValue.Web.Controllers.Tests
                 Waiter.wait(driver);
                 Assert.True(driver.FindElement(By.CssSelector(".projection-tbl")).Enabled);
                 Assert.True(driver.FindElement(By.CssSelector(".projection-tbl tbody tr")).Enabled);
+            }
+        }
+        [Fact()]
+        public void Edit_TestNegativeNumber()
+        {
+            using (IWebDriver driver = new ChromeDriver())
+            {
+                driver.Navigate().GoToUrl(homeUrl);
+                string script = "document.querySelector(\"a.edit-link\").click()";
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(script);
+
+                driver.FindElement(By.Name("PresetValue")).Clear();
+                driver.FindElement(By.Name("PresetValue")).SendKeys("-5000");
+                driver.FindElement(By.CssSelector(".Name")).SendKeys(" " + DateTime.Now.ToString());
+                string previewScript = "document.querySelector(\"a.btn-preview\").click()";
+                js.ExecuteScript(previewScript);
+                Assert.True(driver.FindElement(By.Id("PresetValue-error")).Enabled);
+                Waiter.wait(driver, 1500, 2000);
+                Assert.True(driver.FindElement(By.CssSelector(".d-block")).Enabled);
             }
         }
         [Fact()]
