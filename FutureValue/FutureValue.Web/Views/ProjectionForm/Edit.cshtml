@@ -70,6 +70,8 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }<script src="~/js/projectionform/projectionformpages.js"></script>
     <script src="~/js/projectionform/editpage.js"></script>
 }

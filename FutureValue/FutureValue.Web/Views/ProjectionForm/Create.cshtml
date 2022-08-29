@@ -52,7 +52,7 @@
             </div>
             <div class="form-group d-none">
                 <label asp-for="DateCreated" class="control-label hidden"></label>
-                <input asp-for="DateCreated" class="form-control" type="hidden" value="@DateTimeOffset.UtcNow" />
+                <input asp-for="DateCreated" class="form-control DateCreated" type="hidden" value="@DateTimeOffset.UtcNow" />
                 <span asp-validation-for="DateCreated" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -74,5 +74,6 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="~/js/projectionform/projectionformpages.js"></script>
     <script src="~/js/projectionform/createpage.js"></script>
 }
