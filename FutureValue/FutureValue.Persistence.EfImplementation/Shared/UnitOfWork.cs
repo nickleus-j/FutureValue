@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using FutureValue.Persistence.Shared;
 using FutureValue.Persistence.ProjectionForms;
+using FutureValue.Persistence.EfImplementation.AspUsers;
 using FutureValue.Persistence.EfImplementation.ProjectionForms;
 using Microsoft.EntityFrameworkCore;
+using FutureValue.Persistence.AspUsers;
 
 namespace FutureValue.Persistence.EfImplementation.Shared
 {
@@ -20,7 +22,7 @@ namespace FutureValue.Persistence.EfImplementation.Shared
         {
             context = new FutureValueContext();
         }
-        public IProjectionFormRepository _ProjectionFormRepository { get; set; }
+        private IProjectionFormRepository _ProjectionFormRepository { get; set; }
         public IProjectionFormRepository ProjectionFormRepository
         {
             get
@@ -33,6 +35,21 @@ namespace FutureValue.Persistence.EfImplementation.Shared
                 return _ProjectionFormRepository;
             }
         }
+        private IAspUserRepository _AspUserRepository { get; set; }
+
+        public IAspUserRepository AspUserRepository
+        {
+            get
+            {
+                if (_AspUserRepository == null)
+                {
+                    _AspUserRepository = new AspUserRepository(context);
+                }
+
+                return _AspUserRepository;
+            }
+        }
+
         public void Save(){ context.Save();}
         
 
