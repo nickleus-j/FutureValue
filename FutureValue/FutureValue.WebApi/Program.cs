@@ -43,7 +43,10 @@ using (var scope = app.Services.CreateScope())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-singleton.AllowCorsFromConfig(builder, app);
+app.UseCors(x => x.AllowAnyHeader()
+      .AllowAnyMethod()
+      .SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost"));
+
 app.MapControllers();
 
 app.Run();
