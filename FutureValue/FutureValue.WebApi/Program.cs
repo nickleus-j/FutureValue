@@ -46,7 +46,6 @@ app.UseAuthorization();
 app.UseCors(x => x.AllowAnyHeader()
       .AllowAnyMethod()
       .SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost"));
-
 app.MapControllers();
 
 app.Run();
