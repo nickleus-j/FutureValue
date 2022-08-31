@@ -23,7 +23,7 @@ namespace FutureValue.Persistence.EfImplementation.AspUsers
         {
             if(entity == null || String.IsNullOrEmpty(entity.UserPassword))
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("Need password");
             }
             if (Find(entity.UserName) != null)
             {

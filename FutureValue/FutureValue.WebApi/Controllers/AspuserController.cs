@@ -27,12 +27,28 @@ namespace FutureValue.WebApi.Controllers
         }
         // GET: api/<AspuserController>
         [HttpGet]
-        [Authorize]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromBody] LoginDto logInValues)
         {
-            return new string[] { "No List", "Secret" };
+            if (logInValues.UnhashedPassword == null)
+            {
+                return BadRequest(new ArgumentNullException("Null password"));
+            }
+            var result = unitOfWork.AspUserRepository.Find(logInValues.UserName,logInValues.UnhashedPassword);
+            AspUserDto dto = _mapper.Map<AspUserDto>(result);
+            return Ok(dto);
         }
-
+        [HttpPost]
+        [Route("login")]
+        public IActionResult login([FromBody] LoginDto logInValues)
+        {
+            if (logInValues.UnhashedPassword == null)
+            {
+                return BadRequest(new ArgumentNullException("Null password"));
+            }
+            var result = unitOfWork.AspUserRepository.Find(logInValues.UserName, logInValues.UnhashedPassword);
+            AspUserDto dto = _mapper.Map<AspUserDto>(result);
+            return result!=null?Ok(dto):BadRequest(new InvalidOperationException("Invalid Credentials"));
+        }
         // GET api/<AspuserController>/5
         [HttpGet("{name}")]
         [Authorize]
@@ -49,14 +65,17 @@ namespace FutureValue.WebApi.Controllers
         {
             AspUser entity = _mapper.Map<AspUser>(aspUser);
             unitOfWork.AspUserRepository.Register(entity, aspUser.UnhashedPassword);
-            
+            unitOfWork.Save();
         }
 
         // PUT api/<AspuserController>/5
         [HttpPut("{id}")]
         [Authorize]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] AspUserDto aspUser)
         {
+            AspUser entity = _mapper.Map<AspUser>(aspUser);
+            unitOfWork.AspUserRepository.Update(entity);
+            unitOfWork.Save();
         }
 
         // DELETE api/<AspuserController>/5

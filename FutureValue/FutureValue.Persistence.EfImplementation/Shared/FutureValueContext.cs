@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using FutureValue.Persistence.Shared;
 using FutureValue.Domain.Entities;
+using FutureValue.Persistence.EfImplementation.AspUsers;
 
 namespace FutureValue.Persistence.EfImplementation.Shared
 {
@@ -26,21 +27,30 @@ namespace FutureValue.Persistence.EfImplementation.Shared
         {
             using (this)
             {
-                if (this.AspUser.Any()||this.ProjectionForm.Any())
+                if (!this.ProjectionForm.Any())
                 {
-                    return;
+                    ProjectionForm.Add(new ProjectionForm
+                    {
+                        DateCreated = DateTimeOffset.Now,
+                        IncrementalRate = 10,
+                        IsActive = true,
+                        LowerBoundInterest = 10,
+                        UpperBoundInterest = 50,
+                        MaturityYears = 5,
+                        PresetValue = 1000,
+                        Name = "Sample"
+                    });
                 }
-                ProjectionForm.Add(new ProjectionForm
+                if (!this.AspUser.Any())
                 {
-                    DateCreated = DateTimeOffset.Now,
-                    IncrementalRate = 10,
-                    IsActive = true,
-                    LowerBoundInterest = 10,
-                    UpperBoundInterest = 50,
-                    MaturityYears = 5,
-                    PresetValue = 1000,
-                    Name = "Sample"
-                });
+                    UserAuthenticator userAuthenticator = new UserAuthenticator();
+                    AspUser.Add(new AspUser
+                    {
+                        IsActive = true,
+                        UserName="sample user",
+                        UserPassword= userAuthenticator.HashPassword("default 123")
+                    });
+                }
                 this.SaveChanges();
             }
         }
