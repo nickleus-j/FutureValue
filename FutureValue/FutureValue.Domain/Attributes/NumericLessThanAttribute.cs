@@ -92,9 +92,5 @@ namespace FutureValue.Domain.Attributes
             return "*." + property;
         }
 
-        //public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
-        //{
-        //    yield return new ModelClientValidationNumericLessThanRule(FormatErrorMessage(metadata.DisplayName), FormatPropertyForClientValidation(this.OtherProperty), this.AllowEquality);
-        //}
     }
 }

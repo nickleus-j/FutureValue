@@ -13,8 +13,10 @@ namespace FutureValue.WebApi
         public MapperProfile()
         {
             CreateMap<ProjectionFormDto, ProjectionForm>().ForMember(destination=>destination.IsActive, o => o.MapFrom(s => true)).ReverseMap();
+            CreateMap<AspUserDto, AspUser>().ForMember(destination => destination.IsActive, o => o.MapFrom(s => true)).ReverseMap();
 
             CreateMap<IEnumerable<ProjectionForm>, List<ProjectionFormDto>>();
+            CreateMap<IEnumerable<AspUser>, List<AspUserDto>>();
         }
     }
 }

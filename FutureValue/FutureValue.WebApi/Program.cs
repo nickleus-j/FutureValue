@@ -1,9 +1,13 @@
 using FutureValue.Persistence.EfImplementation.Shared;
 using FutureValue.Persistence.Shared;
 using FutureValue.WebApi;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 
 InitiatorHelperSingleton singleton= InitiatorHelperSingleton.Instance;
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +28,26 @@ builder.Services.AddDbContext<FutureValueContext>(options =>
 
 builder.Services.AddTransient<IFutureValueContext, FutureValueContext>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
+        ValidAudience = builder.Configuration["Jwt:ValidAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true
+    };
+});
+builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
