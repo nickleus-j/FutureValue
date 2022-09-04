@@ -4,6 +4,7 @@ using FutureValue.Domain.Entities;
 using FutureValue.Domain.Exceptions;
 using FutureValue.Persistence.Shared;
 using FutureValue.WebApi.DTO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,7 @@ namespace FutureValue.WebApi.Controllers
             }
             var result = unitOfWork.AspUserRepository.Find(logInValues.UserName,logInValues.UnhashedPassword);
             AspUserDto dto = _mapper.Map<AspUserDto>(result);
-            return Ok(dto);
+             return result!=null?Ok(dto):BadRequest(new InvalidOperationException("Invalid Credentials"));
         }
         [HttpPost]
         [Route("login")]
@@ -51,7 +52,7 @@ namespace FutureValue.WebApi.Controllers
         }
         // GET api/<AspuserController>/5
         [HttpGet("{name}")]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Get(string name)
         {
             var result = unitOfWork.AspUserRepository.Find(name);
@@ -70,7 +71,7 @@ namespace FutureValue.WebApi.Controllers
 
         // PUT api/<AspuserController>/5
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public void Put([FromBody] AspUserDto aspUser)
         {
             AspUser entity = _mapper.Map<AspUser>(aspUser);
