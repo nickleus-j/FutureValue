@@ -21,10 +21,12 @@ namespace FutureValue.WebApi.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper _mapper;
-        public AspuserController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IConfiguration _configuration;
+        public AspuserController(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration)
         {
             this.unitOfWork = unitOfWork;
             _mapper = mapper;
+            _configuration = configuration;
         }
         // GET: api/<AspuserController>
         [HttpGet]
@@ -55,9 +57,20 @@ namespace FutureValue.WebApi.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Get(string name)
         {
-            var result = unitOfWork.AspUserRepository.Find(name);
+            JwtUtils jUtil = new JwtUtils();
+            var result = jUtil.GetUserFromToken(unitOfWork, HttpContext, _configuration);
+
+            if (result == null)
+            {
+                return NotFound(name);
+            }
             AspUserDto dto = _mapper.Map<AspUserDto>(result);
-            return Ok(dto);
+           
+            if (name.Trim().ToLower() == result.UserName.Trim().ToLower())
+            {
+                return Ok(dto);
+            }
+            return Unauthorized(name);
         }
 
         // POST api/<AspuserController>

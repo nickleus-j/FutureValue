@@ -13,10 +13,14 @@ var Service = (function () {
             var that = _this;
             var args = options.method === "get" || options.method === "delete" ? {
                 method: options.method,
-                headers: { "Content-Type": "application/json; charset=utf-8" }
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    'Authorization': 'Bearer ' + localStorage.getItem('fv.btoken') }
             } : {
                 method: options.method,
-                headers: { "Content-Type": "application/json; charset=utf-8" },
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8",
+                        'Authorization': 'Bearer ' + localStorage.getItem('fv.btoken') },
                 body: JSON.stringify(options.data)
             };
             fetch(options.url, args)

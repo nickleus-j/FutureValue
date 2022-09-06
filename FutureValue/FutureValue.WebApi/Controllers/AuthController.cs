@@ -29,7 +29,6 @@ namespace FutureValue.WebApi.Controllers
             _configuration = configuration ?? throw new ArgumentNullException(nameof(_configuration));
         }
         [HttpPost]
-        //[Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto logInValues)
         {
             IAspUserRepository userRepo = unitOfWork.AspUserRepository;
@@ -39,15 +38,15 @@ namespace FutureValue.WebApi.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim("id",user.ID.ToString()),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
-
-
+                
                 var token = GetToken(authClaims);
-
+                string returnToken = new JwtSecurityTokenHandler().WriteToken(token);
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    token = returnToken,
                     expiration = token.ValidTo
                 });
             }
@@ -67,5 +66,6 @@ namespace FutureValue.WebApi.Controllers
 
             return token;
         }
+
     }
 }

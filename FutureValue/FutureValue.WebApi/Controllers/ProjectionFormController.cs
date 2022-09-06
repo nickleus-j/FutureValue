@@ -6,6 +6,7 @@ using FutureValue.Persistence.Shared;
 using FutureValue.WebApi.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,16 +19,20 @@ namespace FutureValue.WebApi.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper _mapper;
-        public ProjectionFormController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IConfiguration _configuration;
+        public ProjectionFormController(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration configuration)
         {
             this.unitOfWork = unitOfWork;
             _mapper= mapper;
+            _configuration= configuration;
         }
         // GET: api/<ProjectionFormController>
         [HttpGet]
         public IActionResult Get()
         {
-            var results = unitOfWork.ProjectionFormRepository.GetAll();
+            JwtUtils jUtil = new JwtUtils();
+            var aspUser = jUtil.GetUserFromToken(unitOfWork, HttpContext, _configuration);
+            var results = unitOfWork.ProjectionFormRepository.GetAll(aspUser!=null? aspUser.ID:0);
             IEnumerable<ProjectionFormDto> dto = _mapper.Map<IEnumerable<ProjectionFormDto>>(results);
             return Ok(dto);
         }

@@ -60,6 +60,14 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
             return Context.ProjectionForm.Where(form => form.DateCreated >= startDate&&(!endDate.HasValue|| form.DateCreated <= endDate.Value)&&form.IsActive==true)
                    .Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
-        
+
+        public IEnumerable<ProjectionForm> GetAll(int userId)
+        {
+            if (userId <= 0)
+            {
+                return Context.ProjectionForm.Where(form => form.IsActive == true && form.AspUserId == null).ToList();
+            }
+            return Context.ProjectionForm.Where(form => form.IsActive == true && (form.AspUserId == userId|| form.AspUserId == null)).ToList();
+        }
     }
 }
