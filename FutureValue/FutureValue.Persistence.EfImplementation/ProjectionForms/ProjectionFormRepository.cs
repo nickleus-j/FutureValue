@@ -67,7 +67,9 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms
             {
                 return Context.ProjectionForm.Where(form => form.IsActive == true && form.AspUserId == null).ToList();
             }
-            return Context.ProjectionForm.Where(form => form.IsActive == true && (form.AspUserId == userId|| form.AspUserId == null)).ToList();
+            return Context.ProjectionForm.Where(form => form.IsActive == true 
+                    &&Context.AspUser.SingleOrDefault(u=>u.ID==userId&&u.IsActive==true)!=null
+                    && (form.AspUserId == userId|| form.AspUserId == null)).ToList();
         }
     }
 }

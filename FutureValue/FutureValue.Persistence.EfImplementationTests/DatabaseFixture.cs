@@ -1,4 +1,5 @@
 ﻿using FutureValue.Domain.Entities;
+using FutureValue.Persistence.EfImplementation.AspUsers;
 using FutureValue.Persistence.EfImplementation.Shared;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +14,11 @@ namespace FutureValue.Persistence.EfImplementationTests
     public class DatabaseFixture : IDisposable
     {
         public FutureValueContext webContext { get; set; }
+        public string defaultPassword => "default 123";
         public void seed()
         {
+            
+            UserAuthenticator authenticator = new UserAuthenticator();
             DbContextOptions<FutureValueContext> dbContextOptions = new DbContextOptionsBuilder<FutureValueContext>()
                 .UseInMemoryDatabase(databaseName: "FutureValue").Options;
             webContext = new FutureValueContext(dbContextOptions);
@@ -42,6 +46,7 @@ namespace FutureValue.Persistence.EfImplementationTests
                 MaturityYears = 3,
                 Name = "Watch out for variable Interest rates",
                 DateCreated = DateTime.Now,
+                AspUserId=1,
                 PresetValue = 5000
             });
             projectionForms.Add(new ProjectionForm
@@ -55,9 +60,21 @@ namespace FutureValue.Persistence.EfImplementationTests
                 DateCreated = DateTime.Now,
                 PresetValue = 5000
             });
+            
             if (webContext.ProjectionForm.Count() == 0)
             {
                 webContext.ProjectionForm.AddRange(projectionForms);
+                webContext.SaveChanges();
+            }
+            if(webContext.AspUser.Count() == 0)
+            {
+                webContext.AspUser.Add(new AspUser
+                {
+                    ID = 1,
+                    IsActive = true,
+                    UserName = "Sample",
+                    UserPassword = authenticator.HashPassword(defaultPassword)
+                });
                 webContext.SaveChanges();
             }
         }

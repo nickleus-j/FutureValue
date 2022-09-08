@@ -67,7 +67,15 @@ namespace FutureValue.Persistence.EfImplementation.ProjectionForms.Tests
             ProjectionFormRepository repo = new ProjectionFormRepository(webContext);
             Assert.True(repo.GetAll().Count() > 1);
         }
-
+        [Fact()]
+        public void GetAllTestUserId()
+        {
+            ProjectionFormRepository repo = new ProjectionFormRepository(webContext);
+            var result = repo.GetAll(1).Count();
+            Assert.True(result > 1);
+            Assert.True(result > repo.GetAll(0).Count());
+            Assert.True(repo.GetAll(1).Where(f=>f.AspUserId==1).Count()>0);
+        }
         [Fact()]
         public void DeleteTest()
         {
