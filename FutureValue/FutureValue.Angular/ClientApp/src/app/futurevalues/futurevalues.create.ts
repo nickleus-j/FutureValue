@@ -15,6 +15,7 @@ import { FutureValuesUiRoutines } from './futurevalues.UiRoutines';
 export class FutureValuesCreate implements OnInit {
   pForm: projectionForm = new projectionForm();
   headText: string = "Create";
+  directionsText: string = "Add details here";
   @Input() formId: number = 0;
   constructor(private http: HttpClient, private route: ActivatedRoute, private ElByClassName: ElementRef, private router: Router) {
     this.pForm.id = 0;
