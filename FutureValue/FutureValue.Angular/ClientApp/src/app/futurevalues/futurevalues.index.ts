@@ -17,7 +17,7 @@ export class FutureValuesIndex implements OnInit {
   Settings: AppSettings = new AppSettings();
   ngOnInit(): void {
     this.http.get<projectionForm[]>(this.Settings.AppUrl + 'api/ProjectionForm').subscribe(data => {
-      this.forms = data;
+      this.forms = data.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
     })
   }
   onDelete(index: number) {
