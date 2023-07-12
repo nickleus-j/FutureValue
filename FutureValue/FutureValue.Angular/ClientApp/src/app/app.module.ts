@@ -14,7 +14,7 @@ import { FutureValuesIndex } from './futurevalues/futurevalues.index';
 import { FutureValuesDetails } from "./futurevalues/futurevalues.details"
 import { FutureValuesCreate } from './futurevalues/futurevalues.create';
 import { FutureValuesEdit } from './futurevalues/futurevalues.edit';
-
+import { ApyComponent } from './apy/apy.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { FutureValuesEdit } from './futurevalues/futurevalues.edit';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'fv', component: FutureValuesIndex },
+      { path: 'apy', component: ApyComponent },
       { path: 'fv/:id', component: FutureValuesDetails },
       { path: 'fvcreate', component: FutureValuesCreate },
       { path: 'fvedit/:id', component: FutureValuesEdit },
