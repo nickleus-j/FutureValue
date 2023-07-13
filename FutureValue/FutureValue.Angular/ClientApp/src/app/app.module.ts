@@ -23,7 +23,7 @@ import { ApyComponent } from './apy/apy.component';
     HomeComponent,
     CounterComponent,  FutureValuesProjectionTable,
     FetchDataComponent, FutureValuesIndex, FutureValuesDetails
-    , FutureValuesCreate, FutureValuesEdit
+    , FutureValuesCreate, FutureValuesEdit, ApyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -3,7 +3,7 @@
   <tr>
     <th>Rate</th>
     <td>
-      <input  class="form-control  valid" value="{{this.Rate}}"
+      <input  class="form-control  valid"  [(ngModel)]="Rate"
              type="text" data-val="true" data-val-number="Interest must be non negative"
              data-val-range="The field Lower Bound Interest must be between 0 and 100." data-val-range-max="100" data-val-range-min="0"
              data-val-required="The Lower Bound Interest field is required." id="Interest" name="Interest"
@@ -13,9 +13,9 @@
   <tr>
     <th>Number of compounding Periods</th>
     <td>
-      <input type="number" />
+      <input type="number" class="form-control  valid" [(ngModel)]="NCompound"/>
     </td>
   </tr>
 </table>
 <h2>APY: {{this.Result}} </h2>
-<a class="btn btn-success btn-preview" (click)="changeCompound()">Preview</a>
+<a class="btn btn-success btn-preview" (click)="changeCompound()" >Preview</a>
