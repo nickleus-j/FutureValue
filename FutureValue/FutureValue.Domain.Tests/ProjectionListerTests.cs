@@ -39,6 +39,17 @@ namespace FutureValue.Domain.Tests
             Assert.Equal(50, lister.DecideOnIncrementedInterestRate(form, 50));
         }
         [Fact]
+        public void DecideOnIncrementedInterestRate_Test20InterestRateLimit40()
+        {
+            ProjectionLister lister = new ProjectionLister();
+            var form = makeTestForm(20);
+            form.UpperBoundInterest = 40;
+            decimal expected = 30;
+            decimal result = lister.DecideOnIncrementedInterestRate(form, 10);
+            Assert.Equal(expected, result);
+            Assert.Equal(40, lister.DecideOnIncrementedInterestRate(form, 30));
+        }
+        [Fact]
         public void DecideOnIncrementedInterestRate_Test0LowerBound()
         {
             ProjectionLister lister = new ProjectionLister();
