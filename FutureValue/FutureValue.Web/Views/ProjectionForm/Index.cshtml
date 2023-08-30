@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Some Projections</h1>
+<h1>Projections</h1>
 
 <p class="text-center text-capitalize">
     <a class="btn btn-primary" asp-action="Create">Create New</a>
@@ -60,8 +60,8 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new {id=item.ID},new {@class = "edit-link btn btn-dark" }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.ID  },new {@class = "details-link btn btn-success" }) |
+                    @Html.ActionLink("Edit", "Edit", new {id=item.ID},new {@class = "edit-link btn btn-dark" }) 
+                    @Html.ActionLink("Details", "Details", new {  id=item.ID  },new {@class = "details-link btn btn-success" }) 
                     <a href="#TBL" data-id="@item.ID" class="delete-link btn btn-danger">Delete</a>
                 </td>
             </tr>
