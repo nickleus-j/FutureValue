@@ -17,5 +17,15 @@ namespace FutureValue.AngularTests
             wait.PollingInterval = TimeSpan.FromMilliseconds(pollingInterval);
             wait.Until(wd => (DateTime.Now - now) - TimeSpan.FromMilliseconds(milisecodsSpan) > TimeSpan.Zero);
         }
+        public static void WaitJs(IWebDriver driver, string jsExecution= "return document.readyState", double milisecodsSpan = 1000)
+        {
+            var now = DateTime.Now;
+            var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(milisecodsSpan));
+            wait.PollingInterval = TimeSpan.FromMilliseconds(milisecodsSpan);
+            var jsLoad = ((IJavaScriptExecutor)driver).ExecuteScript(jsExecution).ToString().Equals("complete");
+            bool jsReady = jsLoad.Equals("complete");
+
+            wait.Until(wd=> jsLoad);
+        }
     }
 }
