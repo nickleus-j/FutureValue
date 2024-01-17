@@ -99,7 +99,7 @@ namespace FutureValue.Angular.Tests
             }
         }
         [Fact()]
-        public void EditTest()
+        public void EditTest_ChangedName()
         {
             using (IWebDriver driver = new ChromeDriver())
             {

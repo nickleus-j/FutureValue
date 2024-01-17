@@ -8,8 +8,17 @@ using System.Threading.Tasks;
 
 namespace FutureValue.AngularTests
 {
+    /// <summary>
+    /// Use web driver to wait
+    /// </summary>
     public class Waiter
     {
+        /// <summary>
+        /// wait for a milimeter
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="milisecodsSpan">Milisecods to wait</param>
+        /// <param name="pollingInterval"></param>
         public static void wait(IWebDriver driver,double milisecodsSpan=1000,double pollingInterval=1500)
         {
             var now = DateTime.Now;
