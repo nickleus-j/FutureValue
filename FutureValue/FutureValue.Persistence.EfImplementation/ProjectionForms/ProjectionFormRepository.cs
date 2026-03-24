@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FutureValue.Persistence.Shared;
-using FutureValue.Persistence.ProjectionForms;
+﻿using FutureValue.Persistence.ProjectionForms;
 using FutureValue.Persistence.EfImplementation.Shared;
 using Microsoft.EntityFrameworkCore;
 using FutureValue.Domain.Entities;
