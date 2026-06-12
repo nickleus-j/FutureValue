@@ -12,9 +12,8 @@ namespace FutureValue.Domain
         public IEnumerable<ProjectionYear> GenerateProjections(ProjectionForm form)
         {
             IList<ProjectionYear> result = new List<ProjectionYear>();
-            for(int i = 1; i <= form.MaturityYears; i++)
-            {
-                var p=new ProjectionYear();
+            for(int i = 1; i <= form.MaturityYears; i++) {
+                ProjectionYear p=new ProjectionYear();
                 p.Year=i;
                 if (i == 1)
                 {
